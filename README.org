@@ -1,0 +1,190 @@
+* Testing Technologies for HMP BLOG
+** What is this about?
+- In this repository, I am just testing out technologies for my HMP-BLog that I'm going to build. This is more like going to be an MVP of some kind (the most that this repo is going to be used for).
+- But rather than that, this repo is a repository made to be discarded. I'll just test Next JS. And as well as connecting PostreSql to it.
+- I'm going to learn about database stuff for my project as well. So this is going to be pretty cool and time consuming as well. But learning is learning. This is something that would get me somewhere in life. If I am starting this early.
+** Technologies
+*** React
+**** Some Basic Information that I need beforehand:
+***** DOM: object represenation of HTML elements.
+***** Imperative Programming vs Declarative Programming:
+   1. Impreative Programming is rendering of things step-by-step.
+    2. Declararative Programming is rendering of things but without the complication of knowing the control flow (step-by-step). This makes development and maintainability easier when doing stuff with the DOM.
+***** What is JSX: syntax extension for javascript for which you can describe your UI in an HTML-like way. A JSX complier would be Babel (used by React).
+***** What are components?
+- They are user interfaces that can be broken down into smaller building blocks.
+- This is a modularity component. It helps you with code maintability.
+- Below is how you can create a component.
+#+BEGIN_SRC html
+<script type="text/jsx">
+  const app = document.getElementById("app")
+
+
+  function header() {
+  }
+
+  ReactDOM.render(<h1>Develop. Preview. Ship. 🚀</h1>, app)
+</script>
+#+END_SRC
+- Syntax-wise, the component is a function that returns _UI elements_.
+- The UI elements can be then rendered (to be actually visible) by passing in as the first argument of ReactDOM.render() followed by the app argument.
+- This also is some JSX stuff. Just make stuff neater IG, and more familiar.
+#+BEGIN_SRC html
+<script type="text/jsx">
+  const app = document.getElementById("app")
+
+    function Header() {
+      return <h1>Develop. Preview. Ship. 🚀</h1>;
+    }
+
+    ReactDOM.render(<Header />, app);
+</script>
+#+END_SRC
+- You can also nest components like so syntatically (eventually a structure e.g. header including name and logo):
+#+BEGIN_SRC javascript
+function Header() {
+  return <h1>Develop. Preview. Ship. 🚀</h1>;
+}
+
+function HomePage() {
+  return (
+    <div>
+      {/* Nesting the Header component */}
+      <Header />
+    </div>
+  );
+}
+
+ReactDOM.render(<Header />, app);
+#+END_SRC
+***** What are props?
+- If there are some information that you need to pass into React components, they would be called _props_.
+- They are like parameters.
+- Here is how you pass in a prop:
+#+BEGIN_SRC javascript
+// function Header() {
+//   return <h1>Develop. Preview. Ship. 🚀</h1>
+// }
+
+function HomePage() {
+  return (
+    <div>
+      <Header title="React 💙" />
+    </div>
+  );
+}
+
+// ReactDOM.render(<HomePage />, app)
+#+END_SRC
+- Here is how you receive the props:
+#+BEGIN_SRC javascript
+function Header(props) {
+    console.log(props) // { title: "React 💙" }
+//   return <h1>React 💙</h1>
+// }
+
+// function HomePage() {
+//   return (
+//     <div>
+//       <Header title="React 💙" />
+//     </div>
+//   )
+// }
+
+// ReactDOM.render(<HomePage />, app)
+#+END_SRC
+- As you want to get the specific props out of the props dictionary, you can use object destructuring:
+#+BEGIN_SRC javascript
+function Header({ title }) {
+    console.log(title) // "React 💙"
+//  return <h1>React 💙</h1>
+// }
+
+// function HomePage() {
+//   return (
+//     <div>
+//       <Header title="React 💙" />
+//     </div>
+//   )
+// }
+
+// ReactDOM.render(<HomePage />, app)
+#+END_SRC
+- Or what I think the cleaner way is to just reference it with dot notation:
+#+BEGIN_SRC javascript
+console.log(props.title);
+#+END_SRC
+- JSX Syntax: Variable (Curly braces—"{}"}. If not, it would just be a text called title which is stupid ha ha.
+#+BEGIN_SRC javascript
+function Header({ title }) {
+  console.log(title);
+  return <h1>{title}</h1>;
+}
+#+END_SRC
+- Other examples that you would need to know is template literal, returned value of a function, and ternary operators.
+- But simply, inside the curly braces is where some javascript code is at.
+- Here is something that is pretty cool. You can use array.map() to iterate over an array or list. This makes stuff clearer. I don't know what there is for the dictionaries tho.
+#+BEGIN_SRC javascript
+function HomePage() {
+  const names = ['Ada Lovelace', 'Grace Hopper', 'Margaret Hamilton'];
+
+  return (
+    <div>
+      <Header title="Develop. Preview. Ship. 🚀" />
+      <ul>
+        {names.map((name) => (
+          <li key={name}>{name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+#+END_SRC
+- Also, remember the "key" prop. You need it, give it a meaningful name unlike this.
+***** What is State?
+- Well, this allows interactivity.
+- Firstly though, let's look at event listening and event handling in React. Simple javascript. But curly braces :o.
+#+BEGIN_SRC javascript
+function HomePage() {
+  //    ...
+  function handleClick() {
+    console.log('increment like count');
+  }
+
+  return (
+    <div>
+      {/* ... */}
+      <button onClick={handleClick}>Like</button>
+    </div>
+  );
+}
+#+END_SRC
+****** What are hooks?
+- A set of functions that allow you to add additional logic such as *state* to your component.
+****** Definition of state?
+- State is any information in your UI that changes over time.
+- Here is a code excerpt example:
+#+BEGIN_SRC javascript
+function HomePage() {
+  // ...
+  // Syntax unfamiliar for newbies? it's basically just multiple returned value. The first returned value is the value, the second returned value is the function that updates the value.
+  const [likes, setLikes] = React.useState(0);
+
+  function handleClick() {
+    setLikes(likes + 1);
+  }
+
+  return (
+    <div>
+      {/* ... */}
+      <button onClick={handleClick}>Likes ({likes})</button>
+    </div>
+  );
+}
+#+END_SRC
+****** Conclusion
+- And those are fundamentals of React. The rest are just the little spices that help you to do literally almost everything. Just like learning a library's methods or functions. You just have to see what functions people are using and try those.
+
+*** Next JS
+- Alright, after you know what React is. Let's move straight over to Next JS. Because why the hell not???
+- The following information covers the advanced features of Next JS.
