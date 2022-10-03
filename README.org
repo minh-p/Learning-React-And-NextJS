@@ -188,3 +188,74 @@ function HomePage() {
 *** Next JS
 - Alright, after you know what React is. Let's move straight over to Next JS. Because why the hell not???
 - The following information covers the advanced features of Next JS.
+**** Getting started
+- We are going to use npm from the NodeJS suite.
+- First, create a package.json file. With an empty object.
+#+BEGIN_SRC json
+// package.json
+{
+}
+#+END_SRC
+- Run "npm install":
+#+BEGIN_SRC bash
+npm install react react-dom next
+#+END_SRC
+- If you have the html file from the React section. Change it to this (index.js or index.jsx):
+#+BEGIN_SRC javascript
+// index.html
+import { useState } from 'react';
+function Header({ title }) {
+  return <h1>{title ? title : 'Default title'}</h1>;
+}
+
+function HomePage() {
+  const names = ['Ada Lovelace', 'Grace Hopper', 'Margaret Hamilton'];
+
+  const [likes, setLikes] = useState(0);
+
+  function handleClick() {
+    setLikes(likes + 1);
+  }
+
+  return (
+    <div>
+      <Header title="Develop. Preview. Ship. 🚀" />
+      <ul>
+        {names.map((name) => (
+          <li key={name}>{name}</li>
+        ))}
+      </ul>
+
+      <button onClick={handleClick}>Like ({likes})</button>
+    </div>
+  );
+}
+#+END_SRC
+-  Then move index.js to a folder called [[./pages/][pages/]]
+- Then, add the default export token to help Next.js distinguish which component to render as the main component of the page.
+#+BEGIN_SRC javascript
+// ...
+export default function HomePage() {
+// ...
+#+END_SRC
+- Then finally, adding a script to [[./package.json][package.json]].
+#+BEGIN_SRC javascript
+// package.json
+{
+"scripts": {
+    "dev": "next dev"
+},
+ // "dependencies": {
+ //   "next": "^11.1.0",
+ //   "react": "^17.0.2",
+ //   "react-dom": "^17.0.2"
+ // }
+}
+#+END_SRC
+- To run the development server type in "npm run dev" in the console and go to [[http://localhost:3000][localhost:3000]].
+- One feature of Next.js is Fast Refresh where content instantly gets updated when changes are saved.
+**** How Next.js work
+- There are multiple ways to build an application with React. But you have Next.js which provides a framework.
+***** Development vs. Production [upcoming]
+***** When your code runs: Build Time vs. Runtime [upcoming]
+***** Where rendering happens: Client vs. Server [upcoming]
